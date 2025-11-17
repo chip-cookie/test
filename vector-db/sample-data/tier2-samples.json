@@ -1,0 +1,120 @@
+[
+  {
+    "id": "tier2-blog-2025-001",
+    "content": "블로그 포스팅: 2025년 청년 대출 갈아타기 완벽 가이드\n\n안녕하세요! 오늘은 2025년 청년들을 위한 대환대출 정보를 공유합니다.\n\n서민금융진흥원에서 시행하는 청년 전용 대환대출은 만 34세 이하라면 누구나 신청할 수 있어요. 기존에 카드론이나 대출이 있는 분들이라면 금리를 7%에서 5%로 낮출 수 있다고 합니다.\n\n제가 알아본 바로는 소득 제한이 연 5천만원이고, 최대 3천만원까지 대출이 가능하다고 하네요. 신청할 때 필요한 서류는 신분증, 소득증명원, 기존 대출 증명서 정도입니다.\n\n신청은 서민금융진흥원 홈페이지에서 하면 되고, 2025년 12월까지 신청 가능하다고 합니다!\n\n참고로 제 친구도 작년에 이 대출로 갈아타서 이자를 많이 절약했다고 하더라고요.",
+    "metadata": {
+      "source_tier": "Tier 2",
+      "publish_year": 2025,
+      "policy_end_date": "2025-12-31",
+      "policy_name": "청년 전용 대환대출",
+      "policy_category": "대출",
+      "target_age_min": 19,
+      "target_age_max": 34,
+      "income_limit": 50000000,
+      "location": ["전국"],
+      "official_link": "https://www.kinfa.or.kr",
+      "source_url": "https://blog.naver.com/example/2025-youth-loan",
+      "last_updated": "2025-01-14",
+      "required_documents": [
+        "신분증",
+        "소득증명원",
+        "기존 대출 증명서"
+      ],
+      "keywords": ["청년", "대환대출", "저금리", "블로그"]
+    }
+  },
+  {
+    "id": "tier2-news-2025-001",
+    "content": "뉴스 기사: '청년도약계좌' 2025년 신규 가입자 모집 시작\n\n[파이낸셜뉴스] 2025년 1월 10일\n\n정부가 청년 자산형성 지원을 위해 '청년도약계좌' 신규 가입자 모집을 시작했다. \n\n청년도약계좌는 만 19~34세 청년이 5년간 매월 최대 70만원을 납입하면 정부가 기여금을 추가로 지급하는 상품이다. 총급여 7,500만원 이하 청년이라면 누구나 가입할 수 있다.\n\n서민금융진흥원 관계자는 \"5년 만기 시 약 5,000만원을 수령할 수 있으며, 이자소득세도 면제된다\"고 설명했다.\n\n가입을 원하는 청년은 서민금융진흥원 홈페이지 또는 취급 은행(국민, 신한, 우리, 하나, 농협 등)을 통해 신청하면 된다. 필요 서류는 신분증과 소득확인증명서이다.\n\n신청은 2025년 12월까지 가능하며, 월별 모집 인원에 제한이 있어 조기 마감될 수 있다고 전했다.",
+    "metadata": {
+      "source_tier": "Tier 2",
+      "publish_year": 2025,
+      "policy_end_date": "2025-12-31",
+      "policy_name": "청년도약계좌",
+      "policy_category": "자산형성",
+      "target_age_min": 19,
+      "target_age_max": 34,
+      "income_limit": 75000000,
+      "location": ["전국"],
+      "official_link": "https://www.kinfa.or.kr/youth-leap",
+      "source_url": "https://www.fnnews.com/news/2025/youth-leap",
+      "last_updated": "2025-01-10",
+      "required_documents": [
+        "신분증",
+        "소득확인증명서"
+      ],
+      "keywords": ["청년도약계좌", "자산형성", "뉴스", "정부기여금"]
+    }
+  },
+  {
+    "id": "tier2-community-2025-001",
+    "content": "커뮤니티 글: 청년 버팀목 전세자금대출 신청 후기\n\n제목: 청년 버팀목 전세자금대출 받았어요!\n\n안녕하세요. 29살 직장인입니다. 얼마 전에 청년 버팀목 전세자금대출을 신청해서 승인받았는데, 혹시 필요하신 분들을 위해 후기 남깁니다.\n\n저는 서울에서 전세 1억 5천짜리 구하려고 대출 신청했고요, 금리는 연 2.1%로 나왔습니다. 소득이 4천만원 정도라서 저금리 구간으로 책정된 것 같아요.\n\n필요한 서류:\n- 신분증\n- 주민등록등본\n- 근로소득원천징수영수증\n- 재직증명서\n- 전세계약서\n- 건물등기부등본\n\n은행에서 서류 검토하는 데 일주일 정도 걸렸고, 승인 후 1주일 안에 대출금 받았습니다.\n\n참고로 만 34세 이하만 신청 가능하고, 연소득 5천만원 이하여야 해요. 부부합산이면 7천만원까지 가능하다고 합니다.\n\n주택도시기금 홈페이지에서 자세한 정보 확인할 수 있어요!",
+    "metadata": {
+      "source_tier": "Tier 2",
+      "publish_year": 2025,
+      "policy_end_date": "N/A",
+      "policy_name": "청년 버팀목 전세자금대출",
+      "policy_category": "주거",
+      "target_age_min": 19,
+      "target_age_max": 34,
+      "income_limit": 50000000,
+      "location": ["전국"],
+      "official_link": "https://nhuf.molit.go.kr",
+      "source_url": "https://community.example.com/post/123456",
+      "last_updated": "2025-01-13",
+      "required_documents": [
+        "신분증",
+        "주민등록등본",
+        "근로소득원천징수영수증",
+        "재직증명서",
+        "전세계약서",
+        "건물등기부등본"
+      ],
+      "keywords": ["청년", "전세대출", "버팀목", "후기", "커뮤니티"]
+    }
+  },
+  {
+    "id": "tier2-blog-2025-002",
+    "content": "블로그: 청년 창업 지원금 총정리 (2025년판)\n\n2025년에도 청년 창업 지원금이 계속됩니다! 중소벤처기업부에서 39세 이하 청년 창업자를 대상으로 최대 1억원을 지원한다고 해요.\n\n신청 자격은 창업 3년 이내 기업이거나 예비 창업자라면 누구나 가능합니다. 혁신적인 아이디어가 있으면 더 좋겠죠?\n\n지원 내용:\n- 사업화 자금 최대 1억원\n- 멘토링 프로그램\n- 사무공간 제공\n- 시제품 제작 지원\n\n제가 알기로는 ICT, 바이오, 친환경, 문화콘텐츠 분야가 우대받는다고 들었어요.\n\n신청은 K-Startup 홈페이지에서 2025년 2월부터 3월까지 받는다고 합니다. 필요한 서류는 사업계획서, 신분증, 사업자등록증(있는 경우) 정도예요.\n\n경쟁률이 꽤 높다고 하니 사업계획서를 정말 잘 써야 할 것 같아요!",
+    "metadata": {
+      "source_tier": "Tier 2",
+      "publish_year": 2025,
+      "policy_end_date": "2025-03-31",
+      "policy_name": "청년 창업 지원금",
+      "policy_category": "창업",
+      "target_age_min": 18,
+      "target_age_max": 39,
+      "income_limit": null,
+      "location": ["전국"],
+      "official_link": "https://www.k-startup.go.kr",
+      "source_url": "https://blog.example.com/2025-startup-support",
+      "last_updated": "2025-01-12",
+      "required_documents": [
+        "사업계획서",
+        "신분증",
+        "사업자등록증 (해당자)"
+      ],
+      "keywords": ["청년", "창업", "지원금", "블로그", "스타트업"]
+    }
+  },
+  {
+    "id": "tier2-outdated-2024-001",
+    "content": "뉴스 기사: 2024년 청년 취업 지원금 신청 마감\n\n[경제신문] 2024년 12월 31일\n\n고용노동부가 시행한 '2024년 청년 취업 지원금' 프로그램이 12월 31일자로 접수 마감되었다.\n\n본 프로그램은 만 18~34세 청년 미취업자를 대상으로 구직 활동비를 월 50만원씩 최대 6개월간 지급하는 정책이었다. 2024년 한 해 동안 총 15만 명의 청년이 혜택을 받았다.\n\n고용노동부 관계자는 \"2024년 사업은 종료되었으며, 2025년 계획은 아직 확정되지 않았다\"고 밝혔다.\n\n관련 문의는 고용노동부 콜센터(1350)로 하면 된다.",
+    "metadata": {
+      "source_tier": "Tier 2",
+      "publish_year": 2024,
+      "policy_end_date": "2024-12-31",
+      "policy_name": "2024년 청년 취업 지원금",
+      "policy_category": "취업",
+      "target_age_min": 18,
+      "target_age_max": 34,
+      "income_limit": null,
+      "location": ["전국"],
+      "official_link": "https://www.moel.go.kr",
+      "source_url": "https://news.example.com/2024-employment-support",
+      "last_updated": "2024-12-31",
+      "required_documents": [],
+      "keywords": ["청년", "취업", "지원금", "종료", "마감"]
+    }
+  }
+]

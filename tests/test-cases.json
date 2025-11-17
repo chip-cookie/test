@@ -1,0 +1,229 @@
+[
+  {
+    "test_case_id": "TC-001",
+    "test_name": "대출 갈아타기 요청 (서울, 29세, 연봉 4천만원)",
+    "user_input": "서울 사는 29세 직장인이고, 연봉은 4천만 원이야. 지금 고금리 대출을 저금리 청년 대출로 갈아타고 싶어.",
+    "expected_step1_output": {
+      "age": 29,
+      "location": "서울",
+      "income_annual": 40000000,
+      "employment_status": "직장인",
+      "needs": ["대출 갈아타기", "저금리 대출"],
+      "interest_areas": ["대출"],
+      "target_year": 2025
+    },
+    "expected_policies": [
+      "청년 전용 대환대출"
+    ],
+    "validation_notes": "Tier 1 정책 매칭 확인, 나이/소득 자격 조건 부합 확인"
+  },
+  {
+    "test_case_id": "TC-002",
+    "test_name": "자산 형성 요청 (부산, 25세, 학생)",
+    "user_input": "부산에 사는 25살 대학생입니다. 월 용돈이 50만원 정도고, 저축도 하고 싶고 나중에 창업도 생각하고 있어요.",
+    "expected_step1_output": {
+      "age": 25,
+      "location": "부산",
+      "income_annual": 6000000,
+      "employment_status": "학생",
+      "needs": ["저축", "창업 준비"],
+      "interest_areas": ["자산형성", "창업"],
+      "target_year": 2025
+    },
+    "expected_policies": [
+      "청년도약계좌",
+      "청년 창업 지원금"
+    ],
+    "validation_notes": "학생도 청년도약계좌 가입 가능 여부 확인, 창업 지원금은 예비 창업자 대상"
+  },
+  {
+    "test_case_id": "TC-003",
+    "test_name": "전세자금 요청 (경기, 33세, 프리랜서)",
+    "user_input": "경기도에 거주하는 33세 프리랜서예요. 작년 소득이 5500만원 정도였고, 전세집 구하려고 합니다.",
+    "expected_step1_output": {
+      "age": 33,
+      "location": "경기",
+      "income_annual": 55000000,
+      "employment_status": "프리랜서",
+      "needs": ["전세자금"],
+      "interest_areas": ["주거"],
+      "target_year": 2025
+    },
+    "expected_policies": [],
+    "validation_notes": "청년 버팀목 전세자금대출은 소득 제한 5천만원이므로 자격 조건 불부합으로 제외되어야 함"
+  },
+  {
+    "test_case_id": "TC-004",
+    "test_name": "복합 니즈 (서울, 30세, 직장인, 대출+주거)",
+    "user_input": "서울에 사는 30세 직장인입니다. 연봉은 4500만원이고, 기존 대출도 갈아타고 싶고 전세도 구하려고 합니다.",
+    "expected_step1_output": {
+      "age": 30,
+      "location": "서울",
+      "income_annual": 45000000,
+      "employment_status": "직장인",
+      "needs": ["대출 갈아타기", "전세자금"],
+      "interest_areas": ["대출", "주거"],
+      "target_year": 2025
+    },
+    "expected_policies": [
+      "청년 전용 대환대출",
+      "청년 버팀목 전세자금대출"
+    ],
+    "validation_notes": "두 정책 모두 자격 조건 부합, 우선순위는 사용자 needs에 따라 결정"
+  },
+  {
+    "test_case_id": "TC-005",
+    "test_name": "디지털 교육 및 취업 관심 (인천, 27세, 무직)",
+    "user_input": "인천 사는 27살이고 현재 구직 중입니다. AI나 빅데이터 쪽으로 취업하고 싶어서 관련 교육을 받고 싶어요.",
+    "expected_step1_output": {
+      "age": 27,
+      "location": "인천",
+      "income_annual": 0,
+      "employment_status": "무직",
+      "needs": ["디지털 교육", "취업"],
+      "interest_areas": ["교육", "취업"],
+      "target_year": 2025
+    },
+    "expected_policies": [
+      "K-Digital Credit"
+    ],
+    "validation_notes": "소득 제한 없는 교육 프로그램, 미취업자 대상 적합"
+  },
+  {
+    "test_case_id": "TC-006",
+    "test_name": "Tier 1 vs Tier 2 충돌 테스트",
+    "description": "동일한 정책에 대해 Tier 1과 Tier 2 정보가 다를 때 Tier 1 우선 원칙 적용 확인",
+    "user_input": "서울 29세 직장인, 연봉 4천만원. 청년 전용 대환대출 알아보고 있어요.",
+    "mock_vector_results": [
+      {
+        "source": "Tier 1",
+        "income_limit": 50000000,
+        "required_documents": ["신분증", "소득증명원", "재직증명서", "기존 대출 계약서"]
+      },
+      {
+        "source": "Tier 2 (블로그)",
+        "income_limit": 70000000,
+        "required_documents": ["신분증", "소득증명원", "기존 대출 증명서"]
+      }
+    ],
+    "expected_validation": {
+      "chosen_source": "Tier 1",
+      "income_limit": 50000000,
+      "required_documents": ["신분증", "소득증명원", "재직증명서", "기존 대출 계약서"],
+      "confidence_score": "high",
+      "validation_notes": "Tier 1 공식 출처 우선 적용"
+    }
+  },
+  {
+    "test_case_id": "TC-007",
+    "test_name": "종료된 정책 필터링 테스트",
+    "description": "종료 키워드가 포함된 정책은 제외되어야 함",
+    "user_input": "서울 25세 학생, 취업 지원금 찾고 있어요.",
+    "mock_vector_results": [
+      {
+        "policy_name": "2024년 청년 취업 지원금",
+        "content": "본 정책은 2024년 12월 31일로 접수 마감되었습니다.",
+        "source_tier": "Tier 2"
+      }
+    ],
+    "expected_validation": {
+      "validated_policies": [],
+      "excluded_policies": [
+        {
+          "policy_name": "2024년 청년 취업 지원금",
+          "exclusion_reason": "접수 마감 키워드 발견"
+        }
+      ]
+    }
+  },
+  {
+    "test_case_id": "TC-008",
+    "test_name": "나이 제한 초과 테스트",
+    "description": "사용자 나이가 정책 자격 조건을 초과하는 경우 제외",
+    "user_input": "서울 35세 직장인, 연봉 4천만원. 청년 대환대출 가능한가요?",
+    "expected_step1_output": {
+      "age": 35,
+      "location": "서울",
+      "income_annual": 40000000,
+      "employment_status": "직장인",
+      "needs": ["대출"],
+      "interest_areas": ["대출"],
+      "target_year": 2025
+    },
+    "expected_validation": {
+      "validated_policies": [],
+      "excluded_policies": [
+        {
+          "policy_name": "청년 전용 대환대출",
+          "exclusion_reason": "나이 제한 초과 (자격: 만 19~34세, 사용자: 35세)"
+        }
+      ]
+    }
+  },
+  {
+    "test_case_id": "TC-009",
+    "test_name": "소득 제한 초과 테스트",
+    "description": "사용자 소득이 정책 소득 제한을 초과하는 경우 제외",
+    "user_input": "서울 30세 직장인, 연봉 8천만원. 청년도약계좌 가입하고 싶어요.",
+    "expected_step1_output": {
+      "age": 30,
+      "location": "서울",
+      "income_annual": 80000000,
+      "employment_status": "직장인",
+      "needs": ["자산형성"],
+      "interest_areas": ["자산형성"],
+      "target_year": 2025
+    },
+    "expected_validation": {
+      "validated_policies": [],
+      "excluded_policies": [
+        {
+          "policy_name": "청년도약계좌",
+          "exclusion_reason": "소득 제한 초과 (자격: 총급여 7,500만원 이하, 사용자: 8,000만원)"
+        }
+      ]
+    }
+  },
+  {
+    "test_case_id": "TC-010",
+    "test_name": "Tier 2 교차 검증 테스트",
+    "description": "3개 이상의 Tier 2 출처에서 정보가 일치하면 confidence_score medium",
+    "user_input": "서울 28세 직장인, 청년도약계좌 정보 알려줘.",
+    "mock_vector_results": [
+      {
+        "source": "Tier 2 (블로그 A)",
+        "max_deposit": 700000,
+        "government_contribution": 24000
+      },
+      {
+        "source": "Tier 2 (블로그 B)",
+        "max_deposit": 700000,
+        "government_contribution": 24000
+      },
+      {
+        "source": "Tier 2 (뉴스 C)",
+        "max_deposit": 700000,
+        "government_contribution": 24000
+      }
+    ],
+    "expected_validation": {
+      "confidence_score": "medium",
+      "validation_notes": "3개의 Tier 2 출처에서 정보 일치 확인됨. 공식 사이트 재확인 권장."
+    }
+  },
+  {
+    "test_case_id": "TC-011",
+    "test_name": "전체 워크플로 End-to-End 테스트",
+    "description": "사용자 입력부터 최종 답변 생성까지 전체 프로세스 테스트",
+    "user_input": "서울 사는 29세 직장인이고, 연봉은 4천만 원이야. 지금 고금리 대출을 저금리 청년 대출로 갈아타고 싶어.",
+    "expected_final_output_format": {
+      "title": "# 🎯 2025년도 맞춤형 청년 정책 추천",
+      "user_info_displayed": true,
+      "table_present": true,
+      "table_columns": ["정책 구분", "정책명", "핵심 지원 내용", "신청 자격", "필수 서류", "공식 링크"],
+      "policies_count": ">= 1",
+      "validation_info_present": true,
+      "next_steps_present": true
+    }
+  }
+]

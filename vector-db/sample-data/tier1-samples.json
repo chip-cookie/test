@@ -1,0 +1,128 @@
+[
+  {
+    "id": "tier1-policy-2025-001",
+    "content": "청년 전용 대환대출 프로그램\n\n서민금융진흥원에서 시행하는 청년 전용 대환대출은 만 19세부터 34세 이하의 청년이 기존에 보유한 고금리 대출(연 7% 이상)을 저금리 대출(연 5% 내외)로 전환할 수 있도록 지원하는 정책입니다.\n\n신청 자격:\n- 만 19세 ~ 34세 청년\n- 연소득 5,000만원 이하\n- 기존 대출 금리가 연 7% 이상인 자\n- 신용등급 제한 없음\n\n대출 조건:\n- 대출 금리: 연 4.5% ~ 5.5% (신용도에 따라 차등)\n- 대출 한도: 최대 3,000만원\n- 상환 기간: 최대 10년\n\n필수 제출 서류:\n- 신분증 사본\n- 소득증명원 (근로소득원천징수영수증, 소득금액증명원 등)\n- 재직증명서 (직장인의 경우)\n- 기존 대출 계약서 및 잔액 증명서\n- 대출 거래 내역서\n\n신청 방법:\n서민금융진흥원 홈페이지(https://www.kinfa.or.kr) 또는 전국 서민금융통합지원센터를 통해 신청 가능합니다.\n\n신청 기간: 2025년 1월 1일 ~ 2025년 12월 31일\n문의: 1397 (서민금융진흥원 콜센터)",
+    "metadata": {
+      "source_tier": "Tier 1",
+      "publish_year": 2025,
+      "policy_end_date": "2025-12-31",
+      "policy_name": "청년 전용 대환대출",
+      "policy_category": "대출",
+      "target_age_min": 19,
+      "target_age_max": 34,
+      "income_limit": 50000000,
+      "location": ["전국"],
+      "official_link": "https://www.kinfa.or.kr",
+      "source_url": "https://www.kinfa.or.kr/policy/youth-loan-2025",
+      "last_updated": "2025-01-15",
+      "required_documents": [
+        "신분증 사본",
+        "소득증명원",
+        "재직증명서",
+        "기존 대출 계약서",
+        "대출 거래 내역서"
+      ],
+      "keywords": ["청년", "대환대출", "저금리", "갈아타기", "서민금융"]
+    }
+  },
+  {
+    "id": "tier1-policy-2025-002",
+    "content": "청년도약계좌 (2025년도)\n\n정부가 청년의 자산 형성을 지원하기 위해 시행하는 5년 만기 적금 상품입니다. 본인이 납입한 금액에 정부가 기여금을 추가로 지급하며, 이자 소득에 대해 비과세 혜택을 제공합니다.\n\n신청 자격:\n- 만 19세 ~ 34세 청년 (병역 이행 기간은 최대 6년까지 연령 계산 시 제외)\n- 개인소득 6,000만원 이하 (총급여 기준 7,500만원 이하)\n- 가구소득 중위 180% 이하\n\n지원 내용:\n- 본인 납입: 월 최대 70만원\n- 정부 기여금: 소득 구간별 차등 지급 (월 최대 2.4만원)\n- 비과세 혜택: 이자소득세 면제\n- 5년 만기 시 예상 수령액: 약 5,000만원 (본인 납입 4,200만원 + 정부 기여금 144만원 + 이자)\n\n필수 제출 서류:\n- 신분증 사본\n- 소득확인증명서 (소득금액증명원 또는 근로소득원천징수영수증)\n- 병적증명서 (해당자에 한함)\n\n신청 방법:\n서민금융진흥원 홈페이지 또는 취급 은행(국민, 신한, 우리, 하나, 농협 등)을 통해 신청\n\n신청 기간: 2025년 1월 ~ 2025년 12월 (월별 모집 인원 제한 있음)\n공식 사이트: https://www.kinfa.or.kr/youth-leap\n문의: 1397",
+    "metadata": {
+      "source_tier": "Tier 1",
+      "publish_year": 2025,
+      "policy_end_date": "2025-12-31",
+      "policy_name": "청년도약계좌",
+      "policy_category": "자산형성",
+      "target_age_min": 19,
+      "target_age_max": 34,
+      "income_limit": 75000000,
+      "location": ["전국"],
+      "official_link": "https://www.kinfa.or.kr/youth-leap",
+      "source_url": "https://www.kinfa.or.kr/youth-leap-2025",
+      "last_updated": "2025-01-10",
+      "required_documents": [
+        "신분증 사본",
+        "소득확인증명서",
+        "병적증명서 (해당자)"
+      ],
+      "keywords": ["청년도약계좌", "자산형성", "적금", "비과세", "정부기여금"]
+    }
+  },
+  {
+    "id": "tier1-policy-2025-003",
+    "content": "청년 버팀목 전세자금대출 (2025년)\n\n주택도시기금에서 시행하는 청년 대상 전세자금 대출 프로그램입니다. 무주택 청년의 주거 안정을 위해 시중 금리보다 낮은 금리로 전세자금을 지원합니다.\n\n신청 자격:\n- 만 19세 ~ 34세 이하 무주택 세대주 (예비 세대주 포함)\n- 부부합산 연소득 5,000만원 이하 (외벌이) 또는 7,000만원 이하 (맞벌이)\n- 순자산가액 3.61억원 이하\n- 임차보증금 3억원 (수도권) 또는 2억원 (지방) 이하 주택\n\n대출 조건:\n- 대출 금리: 연 1.8% ~ 2.4% (소득 구간별 차등)\n- 대출 한도: 최대 1억 2,000만원 (수도권 기준)\n- 대출 기간: 2년 (최대 4회 연장 가능, 총 10년)\n\n필수 제출 서류:\n- 신분증 사본\n- 주민등록등본\n- 소득증빙서류 (근로소득원천징수영수증, 소득금액증명원 등)\n- 재직증명서\n- 전세계약서 사본\n- 건물등기부등본\n\n신청 방법:\n주택도시기금 취급 은행(우리, 국민, 신한, 농협, 하나 등)을 통해 신청\n\n신청 기간: 상시 신청 가능 (2025년 기준)\n공식 사이트: https://nhuf.molit.go.kr\n문의: 1599-0001 (주택도시기금 콜센터)",
+    "metadata": {
+      "source_tier": "Tier 1",
+      "publish_year": 2025,
+      "policy_end_date": "N/A",
+      "policy_name": "청년 버팀목 전세자금대출",
+      "policy_category": "주거",
+      "target_age_min": 19,
+      "target_age_max": 34,
+      "income_limit": 50000000,
+      "location": ["전국"],
+      "official_link": "https://nhuf.molit.go.kr",
+      "source_url": "https://nhuf.molit.go.kr/FP/FP05/FP0502/FP05020101.jsp",
+      "last_updated": "2025-01-12",
+      "required_documents": [
+        "신분증 사본",
+        "주민등록등본",
+        "소득증빙서류",
+        "재직증명서",
+        "전세계약서 사본",
+        "건물등기부등본"
+      ],
+      "keywords": ["청년", "전세대출", "버팀목", "주거", "주택도시기금"]
+    }
+  },
+  {
+    "id": "tier1-policy-2025-004",
+    "content": "K-Digital Credit (청년 디지털 일자리 지원)\n\n고용노동부에서 시행하는 청년 디지털 분야 취업 및 재교육 지원 프로그램입니다. 디지털 신기술 교육과 취업 연계를 통해 청년의 일자리 창출을 지원합니다.\n\n신청 자격:\n- 만 18세 ~ 34세 청년 (미취업자 또는 재직자)\n- 학력 제한 없음\n- 디지털 분야(AI, 빅데이터, 클라우드, 메타버스 등)에 관심 있는 자\n\n지원 내용:\n- 교육 훈련비 전액 지원 (최대 500만원)\n- 훈련 참여 수당 지급 (월 최대 31.6만원)\n- 취업 연계 서비스 제공\n- 우수 수료자 대상 추가 인센티브 지급\n\n교육 과정:\n- AI/머신러닝\n- 빅데이터 분석\n- 클라우드 컴퓨팅\n- 사이버보안\n- 메타버스/VR 개발\n\n필수 제출 서류:\n- 신분증 사본\n- 최종학력증명서\n- 개인정보 수집·이용 동의서\n\n신청 방법:\nK-Digital Training 홈페이지(https://www.work.go.kr/kdigital) 또는 HRD-Net에서 신청\n\n신청 기간: 2025년 1월 ~ 2025년 11월 (기수별 모집)\n문의: 1350 (고용노동부 상담센터)",
+    "metadata": {
+      "source_tier": "Tier 1",
+      "publish_year": 2025,
+      "policy_end_date": "2025-11-30",
+      "policy_name": "K-Digital Credit",
+      "policy_category": "교육",
+      "target_age_min": 18,
+      "target_age_max": 34,
+      "income_limit": null,
+      "location": ["전국"],
+      "official_link": "https://www.work.go.kr/kdigital",
+      "source_url": "https://www.work.go.kr/kdigital/2025",
+      "last_updated": "2025-01-08",
+      "required_documents": [
+        "신분증 사본",
+        "최종학력증명서",
+        "개인정보 수집·이용 동의서"
+      ],
+      "keywords": ["청년", "교육", "디지털", "취업", "AI", "빅데이터"]
+    }
+  },
+  {
+    "id": "tier1-policy-2025-005",
+    "content": "청년 창업 지원금 (중소벤처기업부)\n\n중소벤처기업부에서 시행하는 청년 예비창업자 및 초기 창업자 대상 지원 사업입니다. 사업화 자금과 멘토링을 통해 청년 창업을 촉진합니다.\n\n신청 자격:\n- 만 39세 이하 청년 (예비 창업자 또는 창업 3년 이내 기업)\n- 사업자등록증 보유 또는 사업 계획서 제출 가능한 자\n- 혁신적인 아이디어 또는 기술 보유\n\n지원 내용:\n- 사업화 자금: 최대 1억원 (정부 출연금)\n- 멘토링 및 교육 프로그램 제공\n- 사무공간 및 시제품 제작 지원\n- 후속 투자 연계 지원\n\n지원 분야:\n- ICT/소프트웨어\n- 바이오/헬스케어\n- 친환경/에너지\n- 문화콘텐츠\n- 일반 제조/서비스\n\n필수 제출 서류:\n- 신분증 사본\n- 사업계획서\n- 사업자등록증 (창업자의 경우)\n- 재무제표 (해당자)\n\n신청 방법:\nK-Startup 홈페이지(https://www.k-startup.go.kr)를 통해 온라인 신청\n\n신청 기간: 2025년 2월 ~ 2025년 3월 (연 1회 모집)\n공식 사이트: https://www.k-startup.go.kr\n문의: 1357 (창업지원센터)",
+    "metadata": {
+      "source_tier": "Tier 1",
+      "publish_year": 2025,
+      "policy_end_date": "2025-03-31",
+      "policy_name": "청년 창업 지원금",
+      "policy_category": "창업",
+      "target_age_min": 18,
+      "target_age_max": 39,
+      "income_limit": null,
+      "location": ["전국"],
+      "official_link": "https://www.k-startup.go.kr",
+      "source_url": "https://www.k-startup.go.kr/2025-youth",
+      "last_updated": "2025-01-05",
+      "required_documents": [
+        "신분증 사본",
+        "사업계획서",
+        "사업자등록증 (해당자)",
+        "재무제표 (해당자)"
+      ],
+      "keywords": ["청년", "창업", "지원금", "사업화", "스타트업"]
+    }
+  }
+]
