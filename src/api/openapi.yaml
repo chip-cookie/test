@@ -1,0 +1,280 @@
+# =============================================================================
+# OpenAPI 3.0 API 문서
+# =============================================================================
+#
+# 청년 정책 추천 시스템 API 명세서입니다.
+# Swagger UI로 시각화하거나 API 클라이언트 생성에 사용할 수 있습니다.
+#
+# Author: Youth Policy System Team
+# Version: 1.0.0
+# =============================================================================
+
+openapi: 3.0.3
+
+# =============================================================================
+# API 기본 정보
+# =============================================================================
+info:
+  title: 청년 정책 추천 시스템 API
+  description: |
+    AI 기반 청년 정책 추천 시스템의 REST API입니다.
+
+    ## 주요 기능
+    - 사용자 정보 기반 맞춤형 정책 추천
+    - 정책 검색 및 상세 조회
+    - 시스템 상태 모니터링
+
+    ## 인증
+    현재 버전에서는 인증이 필요하지 않습니다.
+    프로덕션 환경에서는 API Key 또는 OAuth 2.0을 사용하세요.
+
+    ## 응답 형식
+    모든 응답은 JSON 또는 Markdown 형식입니다.
+
+  version: 1.0.0
+  contact:
+    name: Youth Policy System Team
+    email: support@youth-policy.example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+# =============================================================================
+# 서버 설정
+# =============================================================================
+servers:
+  - url: http://localhost:5678
+    description: 로컬 개발 서버
+  - url: https://api.youth-policy.example.com
+    description: 프로덕션 서버
+
+# =============================================================================
+# 태그 정의
+# =============================================================================
+tags:
+  - name: 정책 추천
+    description: 맞춤형 정책 추천 API
+  - name: 정책 조회
+    description: 정책 검색 및 상세 조회
+  - name: 시스템
+    description: 시스템 상태 및 모니터링
+
+# =============================================================================
+# API 경로 정의
+# =============================================================================
+paths:
+  # ===========================================================================
+  # 정책 추천 엔드포인트
+  # ===========================================================================
+  /webhook/youth-policy:
+    post:
+      tags:
+        - 정책 추천
+      summary: 맞춤형 정책 추천
+      description: |
+        사용자의 자연어 입력을 분석하여 적합한 청년 정책을 추천합니다.
+
+        ## 처리 과정
+        1. 자연어 입력을 구조화된 JSON으로 변환
+        2. Vector DB에서 관련 정책 검색
+        3. LLM을 통한 검증 및 필터링
+        4. 마크다운 형식의 추천 결과 생성
+
+        ## 응답 시간
+        평균 3-5초 소요
+      operationId: recommendPolicies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendationRequest'
+            examples:
+              대출_갈아타기:
+                summary: 대출 갈아타기 요청
+                value:
+                  userInput: "서울 사는 29세 직장인이고, 연봉은 4천만 원이야. 지금 고금리 대출을 저금리 청년 대출로 갈아타고 싶어."
+              자산_형성:
+                summary: 자산 형성 요청
+                value:
+                  userInput: "부산에 사는 25살 대학생입니다. 저축도 하고 싶고 나중에 창업도 생각하고 있어요."
+      responses:
+        '200':
+          description: 추천 성공
+          content:
+            text/markdown:
+              schema:
+                type: string
+              example: |
+                # 🎯 2025년도 맞춤형 청년 정책 추천
+
+                **고객**님의 조건에 부합하는 유효한 정책입니다.
+
+                | 정책명 | 지원 내용 | 자격 조건 |
+                |--------|----------|----------|
+                | 청년 전용 대환대출 | 고금리 대출을 저금리로 전환 | 만 19~34세 |
+        '400':
+          description: 잘못된 요청
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: 서버 오류
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # ===========================================================================
+  # 헬스체크 엔드포인트
+  # ===========================================================================
+  /healthz:
+    get:
+      tags:
+        - 시스템
+      summary: 헬스체크
+      description: 시스템 상태를 확인합니다.
+      operationId: healthCheck
+      responses:
+        '200':
+          description: 시스템 정상
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        '503':
+          description: 시스템 비정상
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+
+  # ===========================================================================
+  # 메트릭 엔드포인트
+  # ===========================================================================
+  /metrics:
+    get:
+      tags:
+        - 시스템
+      summary: Prometheus 메트릭
+      description: Prometheus 형식의 메트릭을 반환합니다.
+      operationId: getMetrics
+      responses:
+        '200':
+          description: 메트릭 반환
+          content:
+            text/plain:
+              schema:
+                type: string
+
+# =============================================================================
+# 컴포넌트 정의
+# =============================================================================
+components:
+  # ===========================================================================
+  # 스키마
+  # ===========================================================================
+  schemas:
+    RecommendationRequest:
+      type: object
+      required:
+        - userInput
+      properties:
+        userInput:
+          type: string
+          description: 사용자의 자연어 입력
+          minLength: 10
+          maxLength: 1000
+          example: "서울 사는 29세 직장인이고, 연봉은 4천만 원이야."
+
+    UserInfo:
+      type: object
+      description: 구조화된 사용자 정보
+      properties:
+        age:
+          type: integer
+          description: 만 나이
+          example: 29
+        location:
+          type: string
+          description: 거주 지역
+          example: "서울"
+        income_annual:
+          type: integer
+          description: 연소득 (원)
+          example: 40000000
+        employment_status:
+          type: string
+          description: 직업 상태
+          enum: [직장인, 학생, 무직, 자영업, 프리랜서]
+        needs:
+          type: array
+          items:
+            type: string
+          description: 사용자 니즈
+        interest_areas:
+          type: array
+          items:
+            type: string
+          description: 관심 분야
+
+    PolicyInfo:
+      type: object
+      description: 정책 정보
+      properties:
+        policy_name:
+          type: string
+          description: 정책명
+        policy_category:
+          type: string
+          description: 정책 카테고리
+        support_details:
+          type: string
+          description: 지원 내용
+        eligibility:
+          type: string
+          description: 자격 조건
+        required_documents:
+          type: array
+          items:
+            type: string
+          description: 필수 서류
+        official_link:
+          type: string
+          format: uri
+          description: 공식 링크
+
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, unhealthy]
+        timestamp:
+          type: string
+          format: date-time
+        components:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              status:
+                type: string
+              latency_ms:
+                type: number
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: 오류 코드
+        message:
+          type: string
+          description: 오류 메시지
+        details:
+          type: object
+          description: 추가 정보

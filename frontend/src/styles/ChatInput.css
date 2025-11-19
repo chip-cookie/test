@@ -1,0 +1,65 @@
+/**
+ * =============================================================================
+ * 채팅 입력 스타일
+ * =============================================================================
+ */
+
+.chat-input-container {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+  background: white;
+}
+
+/* 텍스트 영역 */
+.chat-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  resize: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  transition: border-color 0.2s;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.chat-input:disabled {
+  background: #f9fafb;
+  cursor: not-allowed;
+}
+
+/* 전송 버튼 */
+.send-button {
+  width: 48px;
+  height: 48px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.send-button:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.send-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.send-button svg {
+  width: 20px;
+  height: 20px;
+}
