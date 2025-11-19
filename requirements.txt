@@ -46,3 +46,5 @@ psutil>=6.1.0
 
 # 로깅 & 터미널 UI
 rich>=13.9.0
+
+pinecone>=3.0.0
