@@ -1,0 +1,32 @@
+# 청년 정책 추천 시스템 Python 의존성
+# pip install -r requirements.txt
+
+# Vector Database
+pinecone-client>=3.0.0
+
+# OpenAI
+openai>=1.0.0
+
+# 환경 변수 관리
+python-dotenv>=1.0.0
+
+# HTTP 요청 (테스트용)
+requests>=2.31.0
+
+# JSON Schema 검증 (선택사항)
+jsonschema>=4.0.0
+
+# 개발/테스트용
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# 데이터 처리 (선택사항)
+pandas>=2.0.0
+numpy>=1.24.0
+
+# 웹 크롤링 (정책 데이터 수집용, 선택사항)
+beautifulsoup4>=4.12.0
+selenium>=4.0.0
+
+# 로깅
+rich>=13.0.0

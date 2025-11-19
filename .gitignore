@@ -1,0 +1,69 @@
+# 환경 변수 (중요!)
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+
+# Node.js (N8N)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+logs/
+*.log
+
+# 테스트
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Docker
+.docker/
+
+# N8N 데이터 (로컬 실행 시)
+.n8n/
+
+# 임시 파일
+tmp/
+temp/
+*.tmp
+
+# 빌드 결과물
+dist/
+build/
