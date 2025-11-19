@@ -1,0 +1,224 @@
+{
+  "vector_database": {
+    "name": "youth-policy-kb",
+    "description": "청년 정책 및 핀테크 상품 정보를 저장하는 Vector Database",
+    "embedding_model": "text-embedding-ada-002",
+    "embedding_dimension": 1536,
+    "similarity_metric": "cosine"
+  },
+  "document_schema": {
+    "required_fields": {
+      "id": {
+        "type": "string",
+        "description": "문서 고유 식별자",
+        "example": "policy-2025-youth-loan-001"
+      },
+      "content": {
+        "type": "text",
+        "description": "정책/상품의 전체 내용 (임베딩 대상)",
+        "max_length": 8000
+      },
+      "embedding": {
+        "type": "vector",
+        "dimension": 1536,
+        "description": "content의 임베딩 벡터"
+      }
+    },
+    "metadata_fields": {
+      "source_tier": {
+        "type": "string",
+        "enum": ["Tier 1", "Tier 2"],
+        "required": true,
+        "description": "데이터 출처의 신뢰도",
+        "examples": {
+          "Tier 1": "정부 공식 사이트, 서민금융진흥원, 복지로, 주택도시기금 등",
+          "Tier 2": "블로그, 뉴스 기사, 금융 상품 홍보물, 커뮤니티 글"
+        }
+      },
+      "publish_year": {
+        "type": "integer",
+        "required": true,
+        "description": "게시/공고 연도",
+        "validation": ">=2024",
+        "example": 2025
+      },
+      "policy_end_date": {
+        "type": "string",
+        "format": "YYYY-MM-DD",
+        "required": true,
+        "description": "정책 종료일 (종료일이 없는 경우 'N/A')",
+        "examples": ["2025-12-31", "2026-06-30", "N/A"]
+      },
+      "policy_name": {
+        "type": "string",
+        "required": true,
+        "description": "정책 또는 상품명",
+        "example": "청년 전용 대환대출"
+      },
+      "policy_category": {
+        "type": "string",
+        "enum": [
+          "대출",
+          "자산형성",
+          "주거",
+          "교육",
+          "창업",
+          "취업",
+          "복지",
+          "금융상품",
+          "기타"
+        ],
+        "required": true,
+        "description": "정책 카테고리"
+      },
+      "target_age_min": {
+        "type": "integer",
+        "required": false,
+        "description": "최소 연령 제한",
+        "example": 19
+      },
+      "target_age_max": {
+        "type": "integer",
+        "required": false,
+        "description": "최대 연령 제한",
+        "example": 34
+      },
+      "income_limit": {
+        "type": "integer",
+        "required": false,
+        "description": "소득 제한 (연소득, 원 단위)",
+        "example": 50000000
+      },
+      "location": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "required": false,
+        "description": "지역 제한 (해당하는 경우)",
+        "example": ["서울", "경기", "전국"]
+      },
+      "official_link": {
+        "type": "string",
+        "format": "url",
+        "required": true,
+        "description": "공식 사이트 링크",
+        "example": "https://www.kinfa.or.kr"
+      },
+      "source_url": {
+        "type": "string",
+        "format": "url",
+        "required": true,
+        "description": "데이터 수집 원본 URL"
+      },
+      "last_updated": {
+        "type": "string",
+        "format": "YYYY-MM-DD",
+        "required": true,
+        "description": "마지막 업데이트 날짜",
+        "example": "2025-01-15"
+      },
+      "required_documents": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "required": false,
+        "description": "필수 제출 서류 목록",
+        "example": [
+          "신분증 사본",
+          "소득증명원",
+          "재직증명서"
+        ]
+      },
+      "keywords": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "required": false,
+        "description": "검색 최적화를 위한 키워드",
+        "example": ["청년", "대출", "저금리", "갈아타기"]
+      }
+    }
+  },
+  "indexing_strategy": {
+    "primary_index": {
+      "field": "id",
+      "type": "primary_key"
+    },
+    "vector_index": {
+      "field": "embedding",
+      "type": "hnsw",
+      "parameters": {
+        "m": 16,
+        "ef_construction": 200
+      }
+    },
+    "metadata_indexes": [
+      {
+        "fields": ["source_tier", "publish_year"],
+        "type": "composite"
+      },
+      {
+        "fields": ["policy_end_date"],
+        "type": "range"
+      },
+      {
+        "fields": ["policy_category"],
+        "type": "categorical"
+      },
+      {
+        "fields": ["target_age_min", "target_age_max"],
+        "type": "range"
+      }
+    ]
+  },
+  "query_strategy": {
+    "hybrid_search": {
+      "enabled": true,
+      "vector_weight": 0.7,
+      "keyword_weight": 0.3
+    },
+    "metadata_filtering": {
+      "stage": "pre-retrieval",
+      "mandatory_filters": [
+        "source_tier IN ['Tier 1', 'Tier 2']",
+        "publish_year >= 2024",
+        "policy_end_date >= CURRENT_DATE OR policy_end_date = 'N/A'"
+      ]
+    },
+    "reranking": {
+      "enabled": true,
+      "model": "cross-encoder/ms-marco-MiniLM-L-12-v2",
+      "top_k_before_rerank": 20,
+      "top_k_after_rerank": 10
+    }
+  },
+  "data_validation_rules": {
+    "on_insert": [
+      {
+        "rule": "source_tier must be 'Tier 1' or 'Tier 2'",
+        "action": "reject"
+      },
+      {
+        "rule": "publish_year must be >= 2024",
+        "action": "warn"
+      },
+      {
+        "rule": "policy_end_date must be valid date or 'N/A'",
+        "action": "reject"
+      },
+      {
+        "rule": "content length must be > 100 characters",
+        "action": "warn"
+      }
+    ],
+    "on_update": [
+      {
+        "rule": "last_updated must be set to current date",
+        "action": "auto-update"
+      }
+    ]
+  }
+}
