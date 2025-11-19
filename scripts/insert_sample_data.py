@@ -13,6 +13,7 @@ import sys
 import argparse
 import time
 from typing import List, Dict, Any
+import os
 from dotenv import load_dotenv
 
 # 환경 변수 로드
