@@ -12,7 +12,7 @@
  */
 
 import { useState, useCallback } from 'react';
-import { policyService } from '../services/policyService';
+import { policyService, RecommendResult } from '../services/policyService';
 
 /**
  * 반환 타입 인터페이스
@@ -24,25 +24,33 @@ interface UsePolicyRecommendationReturn {
   isLoading: boolean;
   /** 오류 */
   error: Error | null;
+  /** 마지막 응답의 제공자 정보 */
+  lastProvider: string | null;
+  /** 마지막 응답 지연 시간 */
+  lastLatency: number | null;
 }
 
 /**
  * 정책 추천 커스텀 훅
  *
- * @returns 추천 함수, 로딩 상태, 오류
+ * Multi-LLM 응답을 처리하고 최적의 결과를 반환합니다.
+ *
+ * @returns 추천 함수, 로딩 상태, 오류, 제공자 정보
  *
  * @example
- * const { getRecommendation, isLoading, error } = usePolicyRecommendation();
+ * const { getRecommendation, isLoading, lastProvider } = usePolicyRecommendation();
  *
  * const handleSubmit = async () => {
  *   const result = await getRecommendation(userInput);
- *   setResponse(result);
+ *   console.log(`응답 제공자: ${lastProvider}`);
  * };
  */
 export const usePolicyRecommendation = (): UsePolicyRecommendationReturn => {
   // 상태
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const [lastProvider, setLastProvider] = useState<string | null>(null);
+  const [lastLatency, setLastLatency] = useState<number | null>(null);
 
   /**
    * 추천 요청 함수
@@ -55,8 +63,17 @@ export const usePolicyRecommendation = (): UsePolicyRecommendationReturn => {
     setError(null);
 
     try {
-      const response = await policyService.recommend(userInput);
-      return response;
+      const result: RecommendResult = await policyService.recommend(userInput);
+
+      // Multi-LLM 메타데이터 저장
+      if (result.provider) {
+        setLastProvider(result.provider);
+      }
+      if (result.latency) {
+        setLastLatency(result.latency);
+      }
+
+      return result.content;
 
     } catch (err) {
       const error = err instanceof Error ? err : new Error('알 수 없는 오류');
@@ -71,6 +88,8 @@ export const usePolicyRecommendation = (): UsePolicyRecommendationReturn => {
   return {
     getRecommendation,
     isLoading,
-    error
+    error,
+    lastProvider,
+    lastLatency
   };
 };

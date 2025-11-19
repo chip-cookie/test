@@ -15,6 +15,7 @@ Version: 1.0.0
 from .metrics import MetricsCollector, metrics
 from .alerts import AlertManager, AlertConfig, AlertLevel
 from .health import HealthChecker, HealthStatus
+from .dashboard import MonitoringDashboard, DashboardConfig, SystemStatus, create_default_dashboard
 
 __all__ = [
     'MetricsCollector',
@@ -23,5 +24,9 @@ __all__ = [
     'AlertConfig',
     'AlertLevel',
     'HealthChecker',
-    'HealthStatus'
+    'HealthStatus',
+    'MonitoringDashboard',
+    'DashboardConfig',
+    'SystemStatus',
+    'create_default_dashboard'
 ]
