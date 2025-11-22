@@ -63,13 +63,13 @@ class SourceTier(Enum):
 # 데이터 클래스 정의 (Data Classes)
 # =============================================================================
 
-@dataclass
+@dataclass(frozen=True)
 class CrawlerConfig:
     """
-    크롤러 설정을 담는 데이터 클래스
+    크롤러 설정을 담는 불변 데이터 클래스
 
     크롤러의 동작 방식을 세부적으로 제어하는 설정값들을 캡슐화합니다.
-    불변성을 보장하기 위해 frozen=True를 사용할 수 있습니다.
+    frozen=True로 불변성을 보장하여 실행 중 설정 변경을 방지합니다.
 
     Attributes:
         base_url (str): 크롤링 대상 사이트의 기본 URL

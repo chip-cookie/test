@@ -29,10 +29,12 @@ from datetime import timedelta
 from abc import ABC, abstractmethod
 
 
-@dataclass
+@dataclass(frozen=True)
 class CacheConfig:
     """
-    캐시 설정 데이터 클래스
+    캐시 설정 불변 데이터 클래스
+
+    실행 중 설정 변경을 방지하여 안정성을 보장합니다.
 
     Attributes:
         host (str): Redis 호스트
@@ -42,6 +44,10 @@ class CacheConfig:
         default_ttl (int): 기본 TTL (초)
         prefix (str): 키 접두사
         max_connections (int): 최대 연결 수
+
+    Note:
+        frozen=True로 인해 생성 후 수정할 수 없습니다.
+        설정 변경이 필요하면 새 인스턴스를 생성하세요.
     """
     host: str = "localhost"
     port: int = 6379

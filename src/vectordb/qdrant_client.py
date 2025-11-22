@@ -36,17 +36,23 @@ import json
 # 설정
 # =============================================================================
 
-@dataclass
+@dataclass(frozen=True)
 class VectorDBConfig:
     """
-    Vector DB 설정
+    Vector DB 불변 설정
+
+    실행 중 설정 변경을 방지하여 안정성을 보장합니다.
 
     Attributes:
         url: Qdrant 서버 URL
         collection_name: 컬렉션 이름
         vector_size: 임베딩 벡터 차원 (OpenAI ada-002는 1536)
-        distance: 유사도 측정 방식
+        distance: 유사도 측정 방식 (Cosine, Dot, Euclid)
         api_key: Qdrant Cloud API 키 (선택)
+        timeout: HTTP 요청 타임아웃 (초)
+
+    Note:
+        frozen=True로 인해 생성 후 수정할 수 없습니다.
     """
     url: str = "http://localhost:6333"
     collection_name: str = "youth-policy-kb"

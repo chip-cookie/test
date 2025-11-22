@@ -32,10 +32,12 @@ from enum import Enum
 # 데이터 클래스 정의
 # =============================================================================
 
-@dataclass
+@dataclass(frozen=True)
 class ProviderConfig:
     """
-    LLM 제공자 설정
+    LLM 제공자 불변 설정
+
+    실행 중 설정 변경을 방지하여 안정성을 보장합니다.
 
     Attributes:
         api_key (str): API 키
@@ -43,6 +45,9 @@ class ProviderConfig:
         temperature (float): 생성 온도 (0.0 ~ 1.0)
         max_tokens (int): 최대 토큰 수
         timeout (int): 요청 타임아웃 (초)
+
+    Note:
+        frozen=True로 인해 생성 후 수정할 수 없습니다.
     """
     api_key: str
     model: str
@@ -51,10 +56,12 @@ class ProviderConfig:
     timeout: int = 30
 
 
-@dataclass
+@dataclass(frozen=True)
 class LLMResponse:
     """
-    LLM 응답 데이터
+    LLM 응답 불변 데이터
+
+    응답 결과의 무결성을 보장합니다.
 
     Attributes:
         provider (str): 제공자 이름 (openai, groq, gemini)
@@ -65,6 +72,9 @@ class LLMResponse:
         success (bool): 성공 여부
         error (Optional[str]): 에러 메시지
         metadata (Dict): 추가 메타데이터
+
+    Note:
+        frozen=True로 인해 생성 후 수정할 수 없습니다.
     """
     provider: str
     content: str

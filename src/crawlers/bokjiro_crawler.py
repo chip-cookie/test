@@ -22,6 +22,7 @@ from datetime import datetime
 from urllib.parse import urljoin, urlencode
 
 from .base_crawler import BaseCrawler, CrawlerConfig, PolicyData, SourceTier
+from .utils import PolicyDataExtractor
 
 
 class BokjiroCrawler(BaseCrawler):
@@ -56,6 +57,9 @@ class BokjiroCrawler(BaseCrawler):
             "교육": "교육", "건강": "건강", "창업": "창업"
         }
         self._youth_keywords = ["청년", "청소년", "대학생", "취준생", "사회초년생"]
+
+        # 데이터 추출기 (공통 유틸리티)
+        self._extractor = PolicyDataExtractor()
 
     async def fetch_policy_list(self) -> List[str]:
         """정책 목록 URL 수집"""
@@ -94,7 +98,7 @@ class BokjiroCrawler(BaseCrawler):
                             item.get_text() if hasattr(item, 'get_text')
                             else str(item)
                         )
-                        if self._is_youth_policy(item_text):
+                        if self._extractor.is_youth_policy(item_text, self._youth_keywords):
                             policy_urls.append(detail_url)
 
                 current_page += 1
@@ -127,14 +131,18 @@ class BokjiroCrawler(BaseCrawler):
             if benefits:
                 content_parts.append(f"지원내용: {benefits}")
 
-            age_min, age_max = self._extract_age_range(target + soup.get_text())
-            income_limit = self._extract_income_limit(target)
-            required_documents = self._extract_documents(soup)
-            start_date, end_date = self._extract_dates(soup)
-            category = self._determine_category(policy_name + summary)
+            age_min, age_max = self._extractor.extract_age_range(target + soup.get_text())
+            income_limit = self._extractor.extract_income_limit(target)
+            required_documents = self._extractor.extract_documents(soup)
+            start_date, end_date = self._extractor.extract_dates(soup)
+            category = self._extractor.determine_category(
+                policy_name + summary,
+                self._category_mapping,
+                default_category="생활지원"
+            )
 
             return PolicyData(
-                policy_id=self._generate_policy_id(url),
+                policy_id=self._extractor.generate_policy_id(url, self._config.source_name),
                 policy_name=policy_name,
                 category=category,
                 content="\n\n".join(content_parts),
@@ -174,7 +182,17 @@ class BokjiroCrawler(BaseCrawler):
         return None
 
     def _extract_from_json(self, html: str) -> List[dict]:
-        """JSON에서 정책 목록 추출"""
+        """
+        JSON 응답에서 정책 목록 추출
+
+        복지로 API는 때때로 JSON 형식으로 응답합니다.
+
+        Args:
+            html: 응답 텍스트 (HTML 또는 JSON)
+
+        Returns:
+            List[dict]: 정책 목록 (JSON 파싱 성공 시)
+        """
         try:
             if html.strip().startswith(('{', '[')):
                 data = json.loads(html)
@@ -186,49 +204,5 @@ class BokjiroCrawler(BaseCrawler):
             pass
         return []
 
-    def _is_youth_policy(self, text: str) -> bool:
-        """청년 정책 여부 확인"""
-        return any(kw in text.lower() for kw in self._youth_keywords)
-
-    def _determine_category(self, text: str) -> str:
-        """카테고리 결정"""
-        for kw, cat in self._category_mapping.items():
-            if kw in text:
-                return cat
-        return "생활지원"
-
-    def _extract_age_range(self, text: str) -> tuple:
-        """연령 범위 추출"""
-        match = re.search(r'(\d{1,2})\s*[~-]\s*(\d{1,2})\s*세', text)
-        if match:
-            return int(match.group(1)), int(match.group(2))
-        return 19, 34
-
-    def _extract_income_limit(self, text: str) -> Optional[int]:
-        """소득 제한 추출"""
-        match = re.search(r'중위소득\s*(\d+)\s*%', text)
-        if match:
-            return int(match.group(1)) * 500000
-        return None
-
-    def _extract_documents(self, soup) -> List[str]:
-        """필수 서류 추출"""
-        items = soup.select(".document-list li, [class*='서류'] li")
-        if items:
-            return [i.get_text().strip() for i in items if i.get_text().strip()][:10]
-        text = soup.get_text()
-        docs = ["신분증", "주민등록등본", "소득증명서", "재직증명서"]
-        return [d for d in docs if d in text]
-
-    def _extract_dates(self, soup) -> tuple:
-        """신청 기간 추출"""
-        dates = re.findall(r'(\d{4})[.\-년](\d{1,2})[.\-월](\d{1,2})', soup.get_text())
-        if dates:
-            d = dates[0]
-            start = f"{d[0]}-{int(d[1]):02d}-{int(d[2]):02d}"
-            end = None
-            if len(dates) > 1:
-                d = dates[1]
-                end = f"{d[0]}-{int(d[1]):02d}-{int(d[2]):02d}"
-            return start, end
-        return None, None
+    # 참고: 대부분의 데이터 추출 로직은 PolicyDataExtractor 유틸리티로 이동됨
+    # (중복 코드 제거 및 재사용성 향상)
